@@ -1,8 +1,8 @@
 CREATE TABLE agenda(
-    id Long PRIMARY KEY,
+    id bigint PRIMARY KEY,
     descricao varchar(255),
     data_hora timestamp,
     data_criacao timestamp,
-    paciente_id integer,
+    paciente_id bigint,
     CONSTRAINT fk_agenda_paciente FOREIGN KEY(paciente_id) REFERENCES paciente(id)
 );
