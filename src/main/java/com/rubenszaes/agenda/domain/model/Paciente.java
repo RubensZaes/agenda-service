@@ -11,11 +11,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "pacientes", schema = "agenda")
+@Table(name = "paciente", schema = "agenda")
 public class Paciente {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pacientes_sq")
-    @SequenceGenerator(schema = "agenda", name = "pacientes_sq", sequenceName = "pacientes_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String sobrenome;

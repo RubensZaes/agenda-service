@@ -1,4 +1,4 @@
-package com.rubenszaes.agenda.model;
+package com.rubenszaes.agenda.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,11 +13,10 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "agendas", schema = "agenda")
+@Table(name = "agenda", schema = "agenda")
 public class Agenda {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "agendas_sq")
-    @SequenceGenerator(schema = "agenda", name = "agendas_sq", sequenceName = "agendas_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "descricao")
     private String descricao;
