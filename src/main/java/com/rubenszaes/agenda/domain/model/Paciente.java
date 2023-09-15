@@ -1,4 +1,4 @@
-package com.rubenszaes.agenda.model;
+package com.rubenszaes.agenda.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "paciente", schema = "agenda")
+@Table(name = "paciente")
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
