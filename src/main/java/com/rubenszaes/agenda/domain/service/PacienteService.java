@@ -1,4 +1,4 @@
-package com.rubenszaes.agenda.service;
+package com.rubenszaes.agenda.domain.service;
 
 import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.repository.PacienteRepository;
