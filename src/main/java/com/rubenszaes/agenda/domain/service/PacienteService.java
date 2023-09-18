@@ -2,6 +2,7 @@ package com.rubenszaes.agenda.domain.service;
 
 import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.repository.PacienteRepository;
+import com.rubenszaes.agenda.exception.BusinessExcepition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,16 @@ public class PacienteService {
     }
 
     public Paciente salvar(Paciente paciente) {
-        // TODO: verificar unicidade de cpf
+        Optional<Paciente> optionalPaciente = pacienteRepository.findByCpf(paciente.getCpf());
+
+        boolean existeCpf = false;
+
+        if (optionalPaciente.isPresent())
+            if (!optionalPaciente.get().getId().equals(paciente.getId())) existeCpf = true;
+
+        if (existeCpf)
+            throw new BusinessExcepition("CPF já Cadastrado!");
+
         return pacienteRepository.save(paciente);
     }
 
