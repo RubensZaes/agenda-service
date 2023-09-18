@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("paciente")
@@ -19,6 +20,16 @@ public class PacienteController {
     public ResponseEntity<List<Paciente>> listarTodos() {
         List<Paciente> pacientes = pacienteService.listarTodos();
         return ResponseEntity.status(HttpStatus.OK).body(pacientes);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Paciente> buscarPorId(@PathVariable("id") Long id) {
+        Optional<Paciente> optionalPaciente = pacienteService.buscarPorId(id);
+
+        if (optionalPaciente.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(optionalPaciente.get());
     }
 
     @PostMapping
