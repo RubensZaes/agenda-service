@@ -30,7 +30,8 @@ public class PacienteService {
         boolean existeCpf = false;
 
         if (optionalPaciente.isPresent())
-            if (!optionalPaciente.get().getId().equals(paciente.getId())) existeCpf = true;
+            if (!optionalPaciente.get().getId().equals(paciente.getId()))
+                existeCpf = true;
 
         if (existeCpf)
             throw new BusinessExcepition("CPF já Cadastrado!");
