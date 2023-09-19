@@ -5,6 +5,7 @@ import com.rubenszaes.agenda.api.dto.PacienteResponseDTO;
 import com.rubenszaes.agenda.api.mapper.PacienteMapper;
 import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.service.PacienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<PacienteResponseDTO> salvar(@RequestBody PacienteRequestDTO pacienteRequestDTO) {
+    public ResponseEntity<PacienteResponseDTO> salvar(@Valid @RequestBody PacienteRequestDTO pacienteRequestDTO) {
         Paciente paciente = pacienteMapper.toPaciente(pacienteRequestDTO);
         Paciente pacienteSalvar = pacienteService.salvar(paciente);
         PacienteResponseDTO pacienteResponseDTO = pacienteMapper.toPacienteResponseDTO(pacienteSalvar);
