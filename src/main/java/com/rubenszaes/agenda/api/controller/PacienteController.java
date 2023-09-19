@@ -1,5 +1,8 @@
 package com.rubenszaes.agenda.api.controller;
 
+import com.rubenszaes.agenda.api.dto.PacienteRequestDTO;
+import com.rubenszaes.agenda.api.dto.PacienteResponseDTO;
+import com.rubenszaes.agenda.api.mapper.PacienteMapper;
 import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +20,35 @@ public class PacienteController {
     private PacienteService pacienteService;
 
     @GetMapping
-    public ResponseEntity<List<Paciente>> listarTodos() {
+    public ResponseEntity<List<PacienteResponseDTO>> listarTodos() {
         List<Paciente> pacientes = pacienteService.listarTodos();
-        return ResponseEntity.status(HttpStatus.OK).body(pacientes);
+        List<PacienteResponseDTO> pacienteResponseDTOS = PacienteMapper.toPacienteResponseList(pacientes);
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteResponseDTOS);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> buscarPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable("id") Long id) {
         Optional<Paciente> optionalPaciente = pacienteService.buscarPorId(id);
-
         if (optionalPaciente.isEmpty())
             return ResponseEntity.notFound().build();
-
-        return ResponseEntity.status(HttpStatus.OK).body(optionalPaciente.get());
+        PacienteResponseDTO pacienteResponseDTO = PacienteMapper.toPacienteResponseDTO(optionalPaciente.get());
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteResponseDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Paciente> salvar(@RequestBody Paciente paciente) {
+    public ResponseEntity<PacienteResponseDTO> salvar(@RequestBody PacienteRequestDTO pacienteRequestDTO) {
+        Paciente paciente = PacienteMapper.toPaciente(pacienteRequestDTO);
         Paciente pacienteSalvar = pacienteService.salvar(paciente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteSalvar);
+        PacienteResponseDTO pacienteResponseDTO = PacienteMapper.toPacienteResponseDTO(pacienteSalvar);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteResponseDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Paciente> update(@RequestBody Paciente paciente) {
+    public ResponseEntity<PacienteResponseDTO> update(@RequestBody PacienteRequestDTO pacienteRequestDTO) {
+        Paciente paciente = PacienteMapper.toPaciente(pacienteRequestDTO);
         Paciente pacienteSalvar = pacienteService.salvar(paciente);
-        return ResponseEntity.status(HttpStatus.OK).body(pacienteSalvar);
+        PacienteResponseDTO pacienteResponseDTO = PacienteMapper.toPacienteResponseDTO(pacienteSalvar);
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteResponseDTO);
     }
 
     @DeleteMapping("/{id}")
