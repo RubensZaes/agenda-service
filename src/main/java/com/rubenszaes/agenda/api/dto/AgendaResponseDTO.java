@@ -1,2 +1,20 @@
-package com.rubenszaes.agenda.api.dto;public class AgendaResponseDTO {
+package com.rubenszaes.agenda.api.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AgendaResponseDTO {
+    private Long id;
+    private String descricao;
+    private LocalDateTime horario;
+    private LocalDateTime dataCriacao;
+    private PacienteResponseDTO pacienteResponseDTO;
 }
