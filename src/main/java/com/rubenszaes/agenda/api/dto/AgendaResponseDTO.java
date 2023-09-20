@@ -1,5 +1,6 @@
 package com.rubenszaes.agenda.api.dto;
 
+import com.rubenszaes.agenda.domain.model.Paciente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class AgendaResponseDTO {
     private String descricao;
     private LocalDateTime horario;
     private LocalDateTime dataCriacao;
-    private PacienteResponseDTO pacienteResponseDTO;
+    private PacienteResponseDTO paciente;
 }
