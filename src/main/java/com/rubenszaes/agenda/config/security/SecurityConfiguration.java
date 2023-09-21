@@ -1,4 +1,4 @@
-package com.rubenszaes.agenda.config;
+package com.rubenszaes.agenda.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
