@@ -1,6 +1,5 @@
 package com.rubenszaes.agenda.domain.service;
 
-import com.rubenszaes.agenda.domain.model.Usuario;
 import com.rubenszaes.agenda.domain.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

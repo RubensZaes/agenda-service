@@ -29,12 +29,12 @@ public class SecurityConfiguration {
             "/login"
     };
 
-    private static final String[] AUTH_BLACKLIST = {
-            // Endpoints Privados
-            "/paciente/**",
-            "/agenda/**",
-            "/usuario/**"
-    };
+//    private static final String[] AUTH_BLACKLIST = {
+//            // Endpoints Privados
+//            "/paciente/**",
+//            "/agenda/**",
+//            "/usuario/**"
+//    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
-                .requestMatchers(AUTH_BLACKLIST).authenticated()
+//                .requestMatchers(AUTH_BLACKLIST).authenticated()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

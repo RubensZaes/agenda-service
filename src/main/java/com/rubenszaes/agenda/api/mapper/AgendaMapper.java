@@ -2,10 +2,7 @@ package com.rubenszaes.agenda.api.mapper;
 
 import com.rubenszaes.agenda.api.dto.AgendaRequestDTO;
 import com.rubenszaes.agenda.api.dto.AgendaResponseDTO;
-import com.rubenszaes.agenda.api.dto.PacienteRequestDTO;
-import com.rubenszaes.agenda.api.dto.PacienteResponseDTO;
 import com.rubenszaes.agenda.domain.model.Agenda;
-import com.rubenszaes.agenda.domain.model.Paciente;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -23,7 +20,7 @@ public class AgendaMapper {
         return modelMapper.map(agendaRequestDTO, Agenda.class);
     }
 
-    public AgendaResponseDTO toAgendaResponseDTO(Agenda agenda){
+    public AgendaResponseDTO toAgendaResponseDTO(Agenda agenda) {
         return modelMapper.map(agenda, AgendaResponseDTO.class);
     }
 

@@ -7,7 +7,6 @@ import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.service.PacienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +55,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         pacienteService.deletar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

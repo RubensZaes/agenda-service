@@ -1,6 +1,5 @@
 package com.rubenszaes.agenda.api.dto;
 
-import com.rubenszaes.agenda.domain.model.Paciente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
