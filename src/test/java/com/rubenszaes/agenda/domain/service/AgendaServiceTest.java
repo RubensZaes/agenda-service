@@ -3,6 +3,7 @@ package com.rubenszaes.agenda.domain.service;
 import com.rubenszaes.agenda.domain.model.Agenda;
 import com.rubenszaes.agenda.domain.model.Paciente;
 import com.rubenszaes.agenda.domain.repository.AgendaRepository;
+import com.rubenszaes.agenda.exception.BusinessExcepition;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class AgendaServiceTest {
     @InjectMocks
@@ -56,6 +58,32 @@ class AgendaServiceTest {
 
         Assertions.assertThat(agendaSalva.getPaciente()).isNotNull();
         Assertions.assertThat(agendaSalva.getDataCriacao()).isNotNull();
+    }
 
+    @Test
+    @DisplayName("Não deve salvar agendamento sem paciente.")
+    void salvarErroPacienteNaoEncontrado() {
+
+        // ARRANGE
+        LocalDateTime now = LocalDateTime.now();
+        Agenda agenda = new Agenda();
+        agenda.setDescricao("Teste Descricao Agendamento");
+        agenda.setHorario(now);
+
+        Paciente paciente = new Paciente();
+        paciente.setId(1L);
+        paciente.setNome("TESTE Paciente");
+
+        agenda.setPaciente(paciente);
+
+        Mockito.when(pacienteService.buscarPorId(ArgumentMatchers.any())).thenReturn(Optional.empty());
+
+        // ACTIONS
+        BusinessExcepition businessExcepition = assertThrows(BusinessExcepition.class, () -> {
+            agendaService.salvar(agenda);
+        });
+
+        // ASSERTIONS
+        Assertions.assertThat(businessExcepition.getMessage()).isEqualTo("Paciente não encontrado");
     }
 }
